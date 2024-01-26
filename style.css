@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #FDF9F3;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    border: 1px solid #2C292D;
+    min-width: 500px;
+    min-height: 500px;
+    border-radius: 12px;
+    padding: 30px 40px 40px 40px;
+}
+
+
+/* Logo Section */
+.logo {
+    /* border: 1px solid #2C292D; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.logo img {
+    height: calc(52rem / 16);
+}
+
+.logo h1 {
+    display: flex;
+    color: #2C292D;
+    font-size: calc(48rem / 16);
+    font-weight: 500;
+}
+
+/* Form Section */
+form {
+    height: 300px;  
+}
+
+.input-container {
+    font-size: 1rem;
+    position: relative;
+}
+
+input {
+    border: 1px solid #2C292D;
+    border-radius: 4px;
+    width: 23em;
+    height: 3.5em;
+    padding: 0.75em 0.875em;
+    font-size: inherit;
+    background-color: #FDF9F3;
+}
+input:focus {
+    border-color: 	#789de8;
+    outline: 1px solid 	#789de8;
+}
+input:invalid {
+    border-color: #FF6188;
+    outline: 1px solid 	#FF6188;
+}
+
+label {
+    position: absolute;
+    top: 1em;
+    left: 0.875em;
+    pointer-events: none;
+    transition: font-size, transform 0.3s ease 0s;
+}
+
+input:focus + label {
+    transform: translate(-0.1875em, calc(-0.75em - 1em));
+    font-size: 0.75em;
+    background-color: #FDF9F3;
+    padding: 0 0.375em;
+    color: #789de8;
+}
+input:invalid + label {
+    transform: translate(-0.1875em, calc(-0.75em - 1em));
+    font-size: 0.75em;
+    background-color: #FDF9F3;
+    padding: 0 0.375em;
+    color: #FF6188;
+}
+
+
+
+
+
+
+
