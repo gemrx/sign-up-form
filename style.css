@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
+:root {
+    ---white: #FDF9F3; 
+    ---black: #2C292D;
+    ---blue: #789de8;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,10 +14,7 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: #FDF9F3;
-}
-
-main {
+    background-color: var(---white);
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -19,92 +22,131 @@ main {
     align-items: center;
 }
 
-.container {
-    border: 1px solid #2C292D;
+.form-container {
+    border: 1px solid var(---black);
     min-width: 500px;
     min-height: 500px;
     border-radius: 12px;
-    padding: 30px 40px 40px 40px;
+    padding: 1.875rem 2.5rem 2.5rem 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Logo Section */
 .logo {
     width: fit-content;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
 
-    
+    & h1 {
+        display: flex;
+        color: var(---black);
+        font-size: 1em;
+        font-weight: 500;
+    }
+
+    & svg {
+        width: auto;
+        height: 1em;
+        fill: var(---black);
+    }
 }
 
-img {
-    height: calc(52rem / 16);
-}
-
-h1 {
-    display: flex;
-    color: #2C292D;
-    font-size: calc(48rem / 16);
-    font-weight: 500;
-}
-
-
-/* Form Section */
 form {
     width: fit-content;
-    height: 300px;
-}
-
-.column {
+    min-height: 300px;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    align-items: flex-start;
 }
 
 .field-group {
     font-size: 1rem;
     position: relative;
-}
+    ---field-width: 26em;
 
-input {
-    border: 1px solid #2C292D;
-    border-radius: 4px;
-    width: 23em;
-    height: 3.5em;
-    padding: 0.75em 0.875em;
-    font-size: inherit;
-    background-color: #FDF9F3;
+    input, select {
+        appearance: none;
+        border: 1px solid var(---black);
+        border-radius: 6px;
+        color: var(---black);
+        width: var(---field-width);
+        height: 3.5em;
+        padding: 0.75em 0.875em;
+        font-size: inherit;
+        background-color: var(---white);
+        
+        &:is(:focus, :valid) {
+            + label {
+                transform: translate(-0.1875em, calc(-0.75em - 1em));
+                font-size: 0.75em;
+                background-color: var(---white);
+                padding: 0 0.375em;
+            }
+        }
     
-    &:is(:focus, :valid) {
-        + label {
-            transform: translate(-0.1875em, calc(-0.75em - 1em));
-            font-size: 0.75em;
-            background-color: #FDF9F3;
-            padding: 0 0.375em;
+        &:focus {
+            border-color: 	var(---blue);
+            outline: 1px solid 	var(---blue);
+    
+            + label {
+                color: var(---blue);
+            }
         }
     }
-
-    &:focus {
-        border-color: 	#789de8;
-        outline: 1px solid 	#789de8;
-
-        + label {
-            color: #789de8;
-        }
+        
+    label {
+        position: absolute;
+        top: 1em;
+        left: 0.875em;
+        pointer-events: none;
+        transition: color, font-size, transform 0.3s ease 0s;
     }
 }
 
-label {
-    position: absolute;
-    top: 1em;
-    left: 0.875em;
-    pointer-events: none;
-    transition: color, font-size, transform 0.3s ease 0s;
+.birthday-row {
+    display: flex;
+    gap: 0.75em;
+
+    & input, select {
+        width: calc((var(---field-width) - (0.75em * 2)) / 3); /* (input width - gaps) / number of fields group */
+    }
 }
+
+.select-group {
+    & svg {
+        fill: var(---black);
+        position: absolute;
+        width: 12px;
+        top: 1.375em;
+        right: 16px;
+        pointer-events: none;
+    }
+}
+
+button {
+    align-self: flex-end;
+    border: 1px solid var(---black);
+    background-color: var(---blue);
+    border-radius: 6px;
+    padding: 12px 24px;
+    color: var(---white);
+    font-size: 0.875rem;
+    font-weight: 600;
+    
+    &:hover {
+        cursor: pointer;
+        filter: brightness(93%);
+        box-shadow: 1px 2px 2px hsl(0deg 0% 0% / 0.1);
+    }
+}
+
+
+
 
 
 
