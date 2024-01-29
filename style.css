@@ -4,6 +4,7 @@
     ---white: #FDF9F3; 
     ---black: #2C292D;
     ---blue: #789de8;
+    --red: #FF6188;
 }
 
 * {
@@ -15,17 +16,13 @@
 body {
     font-family: 'Open Sans', sans-serif;
     background-color: var(---white);
-    width: 100vw;
-    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding: 20px 0;
 }
 
 .form-container {
     border: 1px solid var(---black);
-    min-width: 500px;
-    min-height: 500px;
     border-radius: 12px;
     padding: 1.875rem 2.5rem 2.5rem 2.5rem;
     display: flex;
@@ -64,8 +61,17 @@ form {
     align-items: flex-start;
 }
 
-.field-group {
+.row {
     font-size: 1rem;
+
+    .error-message {
+        color: var(--red);
+        font-size: 0.75em;
+    }
+}
+
+.field {
+    font-size: inherit;
     position: relative;
     ---field-width: 26em;
 
@@ -108,7 +114,7 @@ form {
     }
 }
 
-.birthday-row {
+.birthday {
     display: flex;
     gap: 0.75em;
 
@@ -117,14 +123,21 @@ form {
     }
 }
 
-.select-group {
-    & svg {
-        fill: var(---black);
+.select {
+    .chevron-icon {
+        mask-image: url(assets/chevron-down.svg);
+        width: 0.8em;
+        height: 0.8em;
+        background-color: #2C292D;
         position: absolute;
-        width: 12px;
         top: 1.375em;
-        right: 16px;
+        right: 0.9em;
         pointer-events: none;
+
+        /* add or remove this class with classList.toggle() method */
+        &.active { 
+            transform: rotate(180deg);
+        }
     }
 }
 
@@ -144,6 +157,15 @@ button {
         box-shadow: 1px 2px 2px hsl(0deg 0% 0% / 0.1);
     }
 }
+
+.mask {
+    -webkit-mask-image: url(assets/chevron-down.svg);
+    mask-image: url(assets/chevron-down.svg);
+    width: 3rem;
+    height: 3rem;
+    background-color: #2C292D;
+}
+
 
 
 

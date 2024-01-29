@@ -16,67 +16,73 @@
         </div>
         <form>
             <div class="row">
-                <div class="field-group firstname">
+                <div class="field">
                     <input type="text" name="firstname" id="firstname" pattern="[\p{L} ]+" minlength="1" required>
                     <label>First name</label>
                 </div>
+                <span class="error-message"></span>
             </div>
             <div class="row">
-                <div class="field-group lastname">
+                <div class="field">
                     <input type="text" name="lastname" id="lastname" minlength="1" required>
                     <label>Last name</label>
                 </div>
-            </div>
-            <div class="row birthday-row">
-                <div class="field-group select-group">
-                    <select name="months" id="months" required>
-                        <option value="" disabled selected hidden></option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
-                    </select>
-                    <label>Month</label>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>
-                    </svg>
-                </div>
-                <div class="field-group day">
-                    <input type="text" name="day" id="day" minlength="1" required>
-                    <label>Day</label>
-                </div>
-                <div class="field-group year">
-                    <input type="text" name="year" id="year" minlength="1" required>
-                    <label>Year</label>
-                </div>
+                <span class="error-message"></span>
             </div>
             <div class="row">
-                <div class="field-group year">
+                <div class="field-container birthday">
+                    <div class="field select">
+                        <select name="months" id="months" required>
+                            <option value="" disabled selected hidden></option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+                        <label>Month</label>
+                        <div class="chevron-icon"></div>
+                    </div>
+                    <div class="field">
+                        <input type="text" name="day" id="day" minlength="1" required>
+                        <label>Day</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" name="year" id="year" minlength="1" required>
+                        <label>Year</label>
+                    </div>
+                </div>
+                <span class="error-message"></span>
+            </div>
+            <div class="row">
+                <div class="field">
                     <input type="text" name="email" id="email" minlength="1" required>
                     <label>Email</label>
                 </div>
+                <span class="error-message"></span>
             </div>
             <div class="row">
-                <div class="field-group year">
+                <div class="field">
                     <input type="password" name="password" id="password" minlength="1" required>
                     <label>Password</label>
                 </div>
+                <span class="error-message"></span>
             </div>
             <div class="row">
-                <div class="field-group year">
+                <div class="field">
                     <input type="password" name="confirm" id="confirm" minlength="1" required>
                     <label>Confirm</label>
                 </div>
+                <span class="error-message"></span>
             </div>
-            <button type="submit">Register</button>
+            <button type="submit">Sign Up</button>
         </form>
     </div>
 </body>
