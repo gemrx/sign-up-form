@@ -123,7 +123,7 @@ form {
     }
 }
 
-.select {
+.select-field {
     .chevron-icon {
         mask-image: url(assets/chevron-down.svg);
         width: 0.8em;
@@ -133,6 +133,7 @@ form {
         top: 1.375em;
         right: 0.9em;
         pointer-events: none;
+        transition: transform 0.3s ease 0s;
 
         /* add or remove this class with classList.toggle() method */
         &.active { 
