@@ -4,7 +4,7 @@
     ---white: #FDF9F3; 
     ---black: #2C292D;
     ---blue: #789de8;
-    --red: #FF6188;
+    ---red: #FF6188;
 }
 
 * {
@@ -65,7 +65,7 @@ form {
     font-size: 1rem;
 
     .error-message {
-        color: var(--red);
+        color: var(---red);
         font-size: 0.75em;
     }
 }
@@ -86,7 +86,7 @@ form {
         font-size: inherit;
         background-color: var(---white);
         
-        &:is(:focus, :valid) {
+        &:focus, &.has-value {
             + label {
                 transform: translate(-0.1875em, calc(-0.75em - 1em));
                 font-size: 0.75em;
@@ -96,11 +96,20 @@ form {
         }
     
         &:focus {
-            border-color: 	var(---blue);
-            outline: 1px solid 	var(---blue);
+            border-color: var(---blue);
+            outline: 1px solid var(---blue);
     
             + label {
                 color: var(---blue);
+            }
+        }
+
+        &.invalid {
+            border-color: var(---red);
+            outline: 1px solid var(---red);
+    
+            + label {
+                color: var(---red);
             }
         }
     }
@@ -114,7 +123,7 @@ form {
     }
 }
 
-.birthday {
+.field-container.birthday {
     display: flex;
     gap: 0.75em;
 
