@@ -1,15 +1,14 @@
-// VARIABLES
-//
-
 const form = document.querySelector('form');
 const inputAndSelectElements = document.querySelectorAll('input, select')
 const selectElements = document.querySelectorAll('select');
 const inputFirstName = document.querySelector('#firstname');
 const inputLastName = document.querySelector('#lastname');
-const selectMonths = document.querySelector('#months');
-
-// FUNCTIONS
-//
+const selectBirthdateMonths = document.querySelector('#months');
+const inputBirthdateDay = document.querySelector('#day');
+const inputBirthdateYear = document.querySelector('#year');
+const inputEmail = document.querySelector('#email');
+const inputPassword = document.querySelector('#password');
+const inputConfirmPassword = document.querySelector('#confirm-password');
 
 function updateSelectFieldIcon (event) {
     const selectField = event.target.parentNode;
@@ -27,78 +26,166 @@ function updateSelectFieldIcon (event) {
     }
 }
 
-function isValidName(name) {
-    // valid names must not be empty and must contain only letters or spaces.
+function isEmpty (string) {
+    return string === '';
+}
+
+function isNameStringValid(name) {
     const pattern = /^[a-zA-Z\s]+$/; 
     return pattern.test(name);
 }
 
-function getParentRow(element) {
+function isDateValid(year, month, day) {
+    const date = new Date(year, month, day);
+    return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day;
+}
+
+function getRowParentElement(element) {
     return element.closest('.row');
 }
 
 function showError(element, message) {
-    const row = getParentRow(element)
+    element.classList.add('invalid');
+    const row = getRowParentElement(element);
     row.querySelector('.error-message').textContent = message;
 }
 
 function resetError(element) {
-    const row = getParentRow(element)
+    const row = getRowParentElement(element)
     row.querySelector('.error-message').textContent = '';
+
     if (element.classList.contains('invalid')) {
         element.classList.remove('invalid');
     }
 }
 
-function checkFirstName(allowEmpty = false) {
+function checkFirstName() {
     const firstName = inputFirstName.value.trim();
     resetError(inputFirstName);
 
-    if (firstName === '') {
-        if (allowEmpty) {
-            return true;
-        }
-        inputFirstName.classList.add('invalid');
+    if (isEmpty(firstName)) {
         showError(inputFirstName, 'This field cannot be blank');
         return false;
     }
 
-    if (isValidName(firstName)) {
+    if (isNameStringValid(firstName)) {
         return true;
     }
-    
-    inputFirstName.classList.add('invalid');
+
     showError(inputFirstName, 'Please enter a valid name');
     return false;
 }
 
-// should work for inline validation and form submit validation
-function checkLastName(allowEmpty = false) {
+function checkLastName() {
     const lastName = inputLastName.value.trim();
     resetError(inputLastName);
 
-    if (lastName === '') {
-        if (allowEmpty) {
-            return true;
-        }
-        inputLastName.classList.add('invalid');
+    if (isEmpty(lastName)) {
         showError(inputLastName, 'This field cannot be blank');
         return false;
     }
 
-    if (isValidName(lastName)) {
+    if (isNameStringValid(lastName)) {
         return true;
     }
     
-    inputLastName.classList.add('invalid');
     showError(inputLastName, 'Please enter a valid name');
     return false;
 }
 
-// EVEN LISTENERS
-//
+function checkBirthdate () {
+    let year = inputBirthdateYear.value;
+    let month = selectBirthdateMonths.value.trim();
+    let day = inputBirthdateDay.value.trim();
+    resetError(inputBirthdateYear);
+    resetError(selectBirthdateMonths);
+    resetError(inputBirthdateDay);
+    
+    if (isEmpty(month) || isEmpty(day) || isEmpty(year)) {
+        showError(inputBirthdateDay, '');
+        showError(selectBirthdateMonths, '');
+        showError(inputBirthdateYear, 'Please fill in a complete birthdate');
+        return false;
+    }
 
-// add/remove class if the input has text
+    year = parseInt(year);
+    month = parseInt(month);
+    day = parseInt(day);
+
+    if (isDateValid(year, month, day)) {
+        return true;
+    }
+
+    showError(inputBirthdateDay, '');
+    showError(selectBirthdateMonths, '');
+    showError(inputBirthdateYear, 'Please enter a valid date');
+    return false;
+}
+
+function checkEmail () {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const email = inputEmail.value.trim();
+    resetError(inputEmail);
+
+    if (pattern.test(email)) {
+        return true;
+    }
+
+    if (isEmpty(email)) {
+        showError(inputEmail, 'This field cannot be blank')
+        return false;
+    }
+
+    showError(inputEmail, 'Please enter a valid email adress');
+    return false;
+}
+
+function checkPassword() {
+    const password = inputPassword.value.trim();
+    const confirmPassword = inputConfirmPassword.value.trim();
+    resetError(inputPassword);
+
+    if (isEmpty(password)) {
+        showError(inputPassword, 'this field cannot be blank');
+        return false;
+    }
+
+    if (!isEmpty(confirmPassword)) {
+
+        if (password === confirmPassword) {
+            return true;
+        }
+
+        showError(inputConfirmPassword, 'Passwords do not match');
+        return false;
+    }
+
+    return true;
+}
+
+function checkConfirmPassword() {
+    const password = inputPassword.value.trim();
+    const confirmPassword = inputConfirmPassword.value.trim();
+    resetError(inputConfirmPassword);
+
+    if (isEmpty(confirmPassword)) {
+        showError(inputConfirmPassword, 'This field cannot be blank');
+        return false;
+    }
+
+    if (!isEmpty(password)) {
+
+        if (password === confirmPassword) {
+            return true;
+        }
+
+        showError(inputConfirmPassword, 'Passwords do not match');
+        return false;
+    }
+
+    return true;
+}
+
 inputAndSelectElements.forEach(element => {
     element.addEventListener('blur', () => {
         const hasValue = !element.value == '';
@@ -110,7 +197,6 @@ inputAndSelectElements.forEach(element => {
     });
 });
 
-// update select icon when the dropdown list is open
 selectElements.forEach(select => {
     select.addEventListener('click', updateSelectFieldIcon);
     select.addEventListener('keypress', updateSelectFieldIcon);
@@ -118,14 +204,55 @@ selectElements.forEach(select => {
 });
 
 inputFirstName.addEventListener('blur', () => {
-    checkFirstName(allowEmpty = true);
+    checkFirstName();
 });
 
 inputLastName.addEventListener('blur', () => {
-    checkLastName(allowEmpty = true);
+    checkLastName();
+});
+
+selectBirthdateMonths.addEventListener('blur', (event) => {
+    const forbiddenIds = ['day', 'year'];
+
+    if (event.relatedTarget === null || event.relatedTarget !== null && !forbiddenIds.includes(event.relatedTarget.id)) {
+        checkBirthdate();
+    }
+});
+
+inputBirthdateDay.addEventListener('blur', (event) => {
+    const forbiddenIds = ['months', 'year'];
+
+    if (event.relatedTarget === null || event.relatedTarget !== null && !forbiddenIds.includes(event.relatedTarget.id)) {
+        checkBirthdate();
+    }
+});
+
+inputBirthdateYear.addEventListener('blur', (event) => {
+    const forbiddenIds = ['day', 'months'];
+
+    if (event.relatedTarget === null || event.relatedTarget !== null && !forbiddenIds.includes(event.relatedTarget.id)) {
+        checkBirthdate();
+    }
+});
+
+inputEmail.addEventListener('blur', () => {
+    checkEmail();
+});
+
+inputPassword.addEventListener('blur', () => {
+    checkPassword();
+});
+
+inputConfirmPassword.addEventListener('blur', () => {
+    checkConfirmPassword();
 });
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
-    checkFirstName(allowEmpty = false);
+    checkFirstName();
+    checkLastName();
+    checkBirthdate();
+    checkEmail();
+    checkPassword();
+    checkConfirmPassword();
 });

@@ -106,10 +106,15 @@ form {
 
         &.invalid {
             border-color: var(---red);
-            outline: 1px solid var(---red);
-    
-            + label {
-                color: var(---red);
+            /* outline: 1px solid var(---red); */
+
+            &:focus {
+                border-color: var(---red);
+                outline: 1px solid var(---red);
+        
+                + label {
+                    color: var(---red);
+                }
             }
         }
     }
@@ -123,7 +128,7 @@ form {
     }
 }
 
-.field-container.birthday {
+.field-container.birthdate {
     display: flex;
     gap: 0.75em;
 
