@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-    ---white: #FDF9F3; 
-    ---black: #2C292D;
-    ---blue: #789de8;
-    ---red: #FF6188;
+    ---background-1: hsl(36, 71%, 97%); 
+    ---background-2: hsl(36, 71%, 96%);
+    ---black: hsl(285, 5%, 20%);
+    ---grey: hsl(285, 5%, 30%);
+    ---blue: hsl(220, 71%, 64%);
+    ---red: hsl(345, 100%, 64%);
 }
 
 * {
@@ -15,14 +17,15 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: var(---white);
+    background-color: var(---background-1);
     display: flex;
     justify-content: center;
     padding: 20px 0;
 }
 
 .form-container {
-    border: 1px solid var(---black);
+    background-color: var(---background-2);
+    border: 1px solid var(---grey);
     border-radius: 12px;
     padding: 1.875rem 2.5rem 2.5rem 2.5rem;
     display: flex;
@@ -53,6 +56,7 @@ body {
 }
 
 form {
+    background-color: var(---background-2);
     width: fit-content;
     min-height: 300px;
     display: flex;
@@ -77,20 +81,20 @@ form {
 
     input, select {
         appearance: none;
-        border: 1px solid var(---black);
+        border: 1px solid var(---grey);
         border-radius: 6px;
         color: var(---black);
         width: var(---field-width);
         height: 3.5em;
         padding: 0.75em 0.875em;
         font-size: inherit;
-        background-color: var(---white);
-        
+        background-color: var(---background-2);
+
         &:focus, &.has-value {
             + label {
                 transform: translate(-0.1875em, calc(-0.75em - 1em));
                 font-size: 0.75em;
-                background-color: var(---white);
+                background-color: var(---background-2);
                 padding: 0 0.375em;
             }
         }
@@ -120,6 +124,7 @@ form {
     }
         
     label {
+        color: var(---grey);
         position: absolute;
         top: 1em;
         left: 0.875em;
@@ -142,7 +147,7 @@ form {
         mask-image: url(assets/chevron-down.svg);
         width: 0.8em;
         height: 0.8em;
-        background-color: #2C292D;
+        background-color: var(---grey);
         position: absolute;
         top: 1.375em;
         right: 0.9em;
@@ -158,28 +163,46 @@ form {
 
 button {
     align-self: flex-end;
-    border: 1px solid var(---black);
+    border: 1px solid var(---grey);
     background-color: var(---blue);
     border-radius: 6px;
     padding: 12px 24px;
-    color: var(---white);
+    color: var(---background-1);
     font-size: 0.875rem;
     font-weight: 600;
     
     &:hover {
         cursor: pointer;
-        filter: brightness(93%);
-        box-shadow: 1px 2px 2px hsl(0deg 0% 0% / 0.1);
+        filter: brightness(96%);
+        box-shadow: 1.25px 2.5px 2px hsl(0deg 0% 0% / 0.1);
     }
 }
 
-.mask {
-    -webkit-mask-image: url(assets/chevron-down.svg);
-    mask-image: url(assets/chevron-down.svg);
-    width: 3rem;
-    height: 3rem;
-    background-color: #2C292D;
+
+.password-field, .confirm-password-field {
+    & input {
+        padding-right: 2.4em;
+    }
+
+    .eye-icon {
+        mask-image: url(assets/eye.svg);
+        mask-repeat: no-repeat;
+        background-color: var(---grey);
+        cursor: pointer;
+        width: 1.2em;
+        height: 1.2em;
+        position: absolute;
+        top: 1.375em;
+        right: 0.9em;
+    }
+
+    .eye-icon.hide {
+        mask-image: url(assets/eye-slash.svg);
+    }
 }
+
+
+
 
 
 

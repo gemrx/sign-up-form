@@ -9,6 +9,7 @@ const inputBirthdateYear = document.querySelector('#year');
 const inputEmail = document.querySelector('#email');
 const inputPassword = document.querySelector('#password');
 const inputConfirmPassword = document.querySelector('#confirm-password');
+const eyeIcons = document.querySelectorAll('.eye-icon');
 
 function updateSelectFieldIcon (event) {
     const selectField = event.target.parentNode;
@@ -197,6 +198,19 @@ inputAndSelectElements.forEach(element => {
     });
 });
 
+eyeIcons.forEach(icon => {
+    icon.addEventListener('click', (event) => {
+        const currentInputElement = icon.parentNode.querySelector('input');
+        if (currentInputElement.type === 'password') {
+            icon.classList.toggle('hide');
+            currentInputElement.type = 'text';
+        } else {
+            icon.classList.toggle('hide');
+            currentInputElement.type = 'password';
+        }
+    });
+});
+
 selectElements.forEach(select => {
     select.addEventListener('click', updateSelectFieldIcon);
     select.addEventListener('keypress', updateSelectFieldIcon);
@@ -239,7 +253,10 @@ inputEmail.addEventListener('blur', () => {
     checkEmail();
 });
 
-inputPassword.addEventListener('blur', () => {
+inputPassword.addEventListener('blur', (event) => {
+    if (event.relatedTarget.classList.contains('eye-icon')) {
+        return;
+    }
     checkPassword();
 });
 
